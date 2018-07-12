@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <th:block th:replace="_fragments/layout::meta">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="description"
+              content="FWD Việt Nam là công ty bảo hiểm cung cấp các sản phẩm và dịch vụ bảo hiểm chuyên nghiệp."/>
+        <meta name="keywords" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    </th:block>
+
+    <th:block th:replace="_fragments/layout::title">
+        <title>FWD VN - MIS REPORT</title>
+    </th:block>
+
+    <th:block th:replace="_fragments/layout::stylesheet">
+        <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css"
+              th:href="@{/vendor/font-awesome/css/font-awesome.css}"/>
+        <link rel="stylesheet" href="../../static/vendor/jqueryui/jquery-ui.css"
+              th:href="@{/vendor/jqueryui/jquery-ui.css}"/>
+        <link rel="stylesheet" href="../../static/css/style.min.css"
+              th:href="@{/css/style.min.css}"/>
+        <link rel="stylesheet" href="../../static/css/custom.css"
+              th:href="@{/css/custom.css}"/>
+    </th:block>
+    <th:block>
+        <link rel="stylesheet" href="../../static/css/group-detail.css"
+              th:href="@{/css/group-detail.css}"/>
+    </th:block>
+
+    <th:block th:replace="_fragments/layout::script">
+        <script src="../../static/vendor/jquery/jquery.js"
+                th:src="@{/vendor/jquery/jquery.js}"></script>
+        <script src="../../static/vendor/jqueryui/jquery-ui.js"
+                th:src="@{/vendor/jqueryui/jquery-ui.js}"></script>
+    </th:block>
+
+    <th:block>
+        <script src="../../static/js/user.js" th:src="@{/js/user.js}"></script>
+    </th:block>
+</head>
+<body style="margin-top: 45px; background-color: rgb(238, 238, 238)">
+<header th:replace="_fragments/layout::header">
+</header>
+<div class="container">
+
+    <h1>Users list</h1>
+    <hr/>
+    <a href="detail.html" class="btn btn-primary" th:href="@{/users/new}">
+        Add new user
+    </a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col-xs-1">No.</th>
+            <th>Username</th>
+            <th>Agent code</th>
+            <th>Email</th>
+            <th class="col-sm-1"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="users" type="java.util.List"*/-->
+        <tr th:each="user,iter : ${users}">
+            <td th:text="${iter.index + 1}">1</td>
+            <td><a href="detail.html"
+                   th:href="@{/users(username=${user?.username})}">
+                <span th:text="${user?.username}">User name</span>
+            </a>
+            </td>
+            <td th:text="${user?.agentCode}">AD800001</td>
+            <td th:text="${user?.email}">abc@domain.com</td>
+            <th>
+                <button type="button" class="btn btn-danger"
+                        th:onclick="'remove(\'' + ${user.username} + '\')'">
+                    Delete
+                </button>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
