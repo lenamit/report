@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <th:block th:fragment="meta">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="description"
+              content="FWD Việt Nam là công ty bảo hiểm cung cấp các sản phẩm và dịch vụ bảo hiểm chuyên nghiệp."/>
+        <meta name="keywords" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    </th:block>
+
+    <th:block th:fragment="title">
+        <title>FWD VN - MIS REPORT</title>
+        <base href="/" th:href="${#httpServletRequest.getContextPath()}"/>
+    </th:block>
+
+    <th:block th:fragment="stylesheet">
+        <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css"
+              th:href="@{/vendor/font-awesome/css/font-awesome.css(ver=#{version})}"/>
+        <link rel="stylesheet" href="../../static/vendor/jqueryui/jquery-ui.css"
+              th:href="@{/vendor/jqueryui/jquery-ui.css(ver=#{version})}"/>
+        <link rel="stylesheet" href="../../static/css/style.min.css"
+              th:href="@{/css/style.min.css(ver=#{version})}"/>
+        <link rel="stylesheet" href="../../static/vendor/primeui/primeui.css"
+              th:href="@{/vendor/primeui/primeui.css(ver=#{version})}"/>
+        <link rel="stylesheet" href="../../static/css/custom.css"
+              th:href="@{/css/custom.css(ver=#{version})}"/>
+    </th:block>
+
+    <th:block th:fragment="script">
+        <script src="../../static/vendor/jquery/jquery.js"
+                th:src="@{/vendor/jquery/jquery.js(ver=#{version})}"></script>
+        <script src="../../static/vendor/jqueryui/jquery-ui.js"
+                th:src="@{/vendor/jqueryui/jquery-ui.js(ver=#{version})}"></script>
+        <script src="../../static/vendor/primeui/primeui.js"
+                th:src="@{/vendor/primeui/primeui.js(ver=#{version})}"></script>
+        <script src="../../static/vendor/x-tag/dist/x-tag-core.js"
+                th:src="@{/vendor/x-tag/dist/x-tag-core.js(ver=#{version})}"></script>
+        <script src="../../static/vendor/primeui/primeelements.js"
+                th:src="@{/vendor/primeui/primeelements.js(ver=#{version})}"></script>
+
+        <script src="../../static/js/app.js"
+                th:src="@{/js/app.js(ver=#{version})}"></script>
+    </th:block>
+</head>
+<body style="margin-top: 45px; background-color: rgb(238, 238, 238)">
+<header th:fragment="header">
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="navbar-header text-center">
+            <a class="gtm-nav navbar-brand visible-xs" target="_blank" href="https://www.fwd.com.vn/vi/">
+                <img src="../../static/img/mobile_logo1.png" alt="FWD Việt Nam" width="46" height="16"
+                     th:src="@{/img/mobile_logo1.png}"/>
+            </a>
+        </div>
+        <div class="mobile-menu-overlay"></div>
+        <div class="navmenu collapse navbar-collapse desktop"
+             aria-expanded="false">
+            <div class="mobile-menu">
+                <div class="top-nav">
+                    <div class="container" style="width: 98%; margin-left: 0; padding-left: 0">
+                        <div class="row">
+                            <ul class="nav navbar-nav left">
+                                <li class="text-center">
+                                    <a href="#" class="gtm-nav" th:href="@{/}">
+                                        MIS REPORT
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
+                                <li class="dropdown" sec:authorize="hasRole('ADMIN')">
+                                    <a class="dropdown-toggle" type="button"
+                                       data-toggle="dropdown">Manage
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/users" th:href="@{/users}">Users</a></li>
+                                        <li><a href="/groups" th:href="@{/groups}">Groups</a></li>
+                                        <li><a href="/roles" th:href="@{/roles}">Roles</a></li>
+                                        <li><a href="/configDetailReports" th:href="@{/configDetailReports}">Configure Detail Report</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" sec:authorize="hasRole('CAN_IMPORT_PLAN')">
+                                    <a class="dropdown-toggle" type="button"
+                                       data-toggle="dropdown" th:href="@{/import}"> Import plan </a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#" class="gtm-nav">
+                                        Welcome <span sec:authentication="name"></span>
+                                    </a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#" th:href="@{/logout}">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div>
+    <h1>BODY</h1>
+</div>
+</body>
+</html>
